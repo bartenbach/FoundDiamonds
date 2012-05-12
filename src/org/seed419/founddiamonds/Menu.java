@@ -61,6 +61,7 @@ public class Menu {
             if (fd.hasPerms(player, "fd.trap")) {
                 player.sendMessage(ChatColor.RED + "    trap" + ChatColor.WHITE + " - Set a diamond ore trap");
                 player.sendMessage(ChatColor.RED + "    trap <itemname>" + ChatColor.WHITE + " - Set a trap with another block");
+                player.sendMessage(ChatColor.WHITE + "    You can also specify a depth after each trap command ");
             }
             if (fd.hasPerms(player, "fd.manage.worlds")) {
                 player.sendMessage(ChatColor.RED + "    world" + ChatColor.WHITE + " - Manage enabled worlds");

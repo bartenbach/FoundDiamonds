@@ -330,31 +330,63 @@ public class FoundDiamonds extends JavaPlugin {
         Location playerLoc = player.getLocation();
         Material trap;
         String item;
+        int depth=0;
         if (args.length == 1) {
             trap = Material.DIAMOND_ORE;
             item = "Diamond ore";
-        } else if (args.length == 2) {
+        } else if (args.length == 2) {	//either trap block specified, old format, or depth specified, assuming diamond blocks
             item = args[1];
             trap = Material.matchMaterial(item);
-        } else if (args.length == 3) {
+            if(trap==null) {
+            	try {
+            		depth = Integer.parseInt(args[1]);
+            	}catch(NumberFormatException ex) {
+            		player.sendMessage(ChatColor.RED + "Please specifiy a valid number as depth");
+            		return;
+            	}
+            	item = "Diamond ore";
+            	trap = Material.DIAMOND_ORE;
+            }
+        } else if (args.length == 3) {	//either new block format specification, or depth + old block formatting
             item = args[1] + "_" + args[2];
             trap = Material.matchMaterial(item);
-        } else {
+            if(trap == null) {
+            	try {
+            		depth = Integer.parseInt(args[2]);
+            	}catch(NumberFormatException ex) {
+               		player.sendMessage(ChatColor.RED + "Please specifiy a valid number as depth");
+            		return;	
+            	}
+            	item = args[1];
+            	trap = Material.matchMaterial(item);
+            }
+        }else if(args.length == 4) {	//new block format + depth
+            item = args[1] + "_" + args[2];
+            trap = Material.matchMaterial(item);
+            try {
+        		depth = Integer.parseInt(args[3]);
+        	}catch(NumberFormatException ex) {
+           		player.sendMessage(ChatColor.RED + "Please specifiy a valid number as depth");
+        		return;	
+        	}
+        }
+        	else {
             player.sendMessage(getPrefix() + ChatColor.RED + " Invalid number of arguments");
             player.sendMessage(ChatColor.RED + "Is it a block and a valid item? Try /fd trap gold ore");
             return;
         }
         if (trap != null && trap.isBlock()) {
-            getTrapLocations(player, playerLoc, trap);
+            getTrapLocations(player, playerLoc, trap, depth);
         } else {
             player.sendMessage(getPrefix() + ChatColor.RED + " Unable to set a trap with '" + item + "'");
             player.sendMessage(ChatColor.RED + "Is it a block and a valid item? Try /fd trap gold ore");
         }
     }
 
-    private void getTrapLocations(Player player, Location playerLoc, Material trap) {
+
+    private void getTrapLocations(Player player, Location playerLoc, Material trap, int depth) {
         int x = playerLoc.getBlockX();
-        int y = playerLoc.getBlockY();
+        int y = playerLoc.getBlockY() - depth;
         int maxHeight = player.getWorld().getMaxHeight();
         if ((y - 2) < 0) {
             player.sendMessage(getPrefix() + ChatColor.RED + " I can't place a trap down there, sorry.");
@@ -380,7 +412,6 @@ public class FoundDiamonds extends JavaPlugin {
             handleTrapBlocks(player, trap, block1, block2, block3, block4);
         }
     }
-
     public void handleTrapBlocks(Player player, Material trap, Block block1, Block block2, Block block3, Block block4) {
         trapBlocks.add(block1.getLocation());
         trapBlocks.add(block2.getLocation());
