@@ -253,8 +253,8 @@ public class Menu {
                 ListHandler.handleListingList(sender, ListHandler.getBroadcastedBlocks());
             } else if (args[1].equalsIgnoreCase("add")) {
                 if (args.length == 2) {
-                    sender.sendMessage(FoundDiamonds.getPrefix() + ChatColor.RED + " Format: /fd add bc item:color ex: coal ore:dark gray");
-                    sender.sendMessage(FoundDiamonds.getPrefix() + ChatColor.RED + " Color is an optional argument.  If color is left out");
+                    sender.sendMessage(FoundDiamonds.getPrefix() + ChatColor.RED + " Format: /fd add bc item:data,color ex: coal ore:dark gray");
+                    sender.sendMessage(FoundDiamonds.getPrefix() + ChatColor.RED + " Data and color are optional arguments.  If color is left out");
                     sender.sendMessage(FoundDiamonds.getPrefix() + ChatColor.RED + " FD will attempt to pick a color for you. ex: obsidian");
                 }
                 ListHandler.handleAddToList(sender, args, ListHandler.getBroadcastedBlocks(), Config.broadcastedBlocks);

@@ -107,7 +107,7 @@ public class ListHandler {
 
     public static void handleAddToList(CommandSender sender, String[] args, List<Node> list, String configString) {
         if (args.length == 2) {
-            sender.sendMessage(FoundDiamonds.getPrefix() + ChatColor.RED + " Format is: item:color");
+            sender.sendMessage(FoundDiamonds.getPrefix() + ChatColor.RED + " Format is: item:data,color");
             sender.sendMessage(ChatColor.RED + " Color is an optional argument.");
             sender.sendMessage(ChatColor.RED + " Ex: sugar cane block:dark green");
         } else if (args.length >= 3) {
