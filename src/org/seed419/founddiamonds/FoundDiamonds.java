@@ -407,10 +407,15 @@ public class FoundDiamonds extends JavaPlugin {
         trapBlocks.add(block2.getLocation());
         trapBlocks.add(block3.getLocation());
         trapBlocks.add(block4.getLocation());
-        block1.setType(trap);
-        block2.setType(trap);
-        block3.setType(trap);
-        block4.setType(trap);
+        if (trap == Material.EMERALD_ORE) {
+        	block1.setType(trap);
+        }
+        else {
+        	block1.setType(trap);
+        	block2.setType(trap);
+        	block3.setType(trap);
+        	block4.setType(trap);
+        	}
         player.sendMessage(getPrefix() + ChatColor.AQUA + " Trap set using " + trap.name().toLowerCase().replace("_", " "));
     }
 
