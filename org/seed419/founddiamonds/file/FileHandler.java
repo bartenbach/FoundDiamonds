@@ -1,13 +1,22 @@
 package org.seed419.founddiamonds.file;
 
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
+import org.bukkit.Material;
+import org.bukkit.OfflinePlayer;
 import org.bukkit.command.CommandSender;
+import org.bukkit.entity.Player;
 import org.seed419.founddiamonds.FoundDiamonds;
+import org.seed419.founddiamonds.Trap;
+
+import com.avaje.ebean.enhance.ant.OfflineFileTransform;
 
 import java.io.*;
 import java.text.MessageFormat;
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashSet;
 /**
  * Attribute Only (Public) License
  * Version 0.a3, July 11, 2011
@@ -74,7 +83,7 @@ public class FileHandler {
             }
         }
         if (traps.exists()) {
-            readBlocksFromFile(traps, fd.getTrapHandler().getTrapBlocks());
+            readTrapsFromFile(traps, fd.getTrapHandler().getTrapBlocks());
         }
         if (placed.exists() && !fd.getConfig().getBoolean(Config.mysqlEnabled)) {
             readBlocksFromFile(placed, fd.getBlockPlaceListener().getFlatFilePlacedBlocks());
@@ -148,6 +157,54 @@ public class FileHandler {
         }
     }
 
+    public boolean writeTrapsToFile(File file, ArrayList<Trap> trapList, String info) {
+        if (trapList.size() > 0) {
+            if (fd.getDataFolder().exists()) {
+                PrintWriter out = null;
+                try {
+                    if (!file.exists()) {
+                        boolean success = file.createNewFile();
+                        if (!success) {
+                            fd.getLog().severe(MessageFormat.format("[{0}] Couldn't create file to store traps in", file.getName()));
+                        }
+                    }
+                    try {
+                        out =  new PrintWriter(new BufferedWriter(new FileWriter(file, false)));
+                        out.write("# " + info);
+                        out.println();
+                        for (Trap m : trapList) {
+                            out.write(m.Trapsummary());
+                            out.println();
+                        }
+                    } catch (IOException ex) {
+                        fd.getLog().severe(MessageFormat.format("Error writing traps to {0}!", file.getName()));
+                    } finally {
+                        fd.getFileUtils().close(out);
+                    }
+                    return true;
+                } catch (IOException ex) {
+                    ex.printStackTrace();
+                    return false;
+                }
+            } else {
+                if (!printed) {
+                    fd.getLog().warning("Plugin folder not found.  Did you delete it?");
+                    printed = true;
+                }
+                return false;
+            }
+        } else {
+            if (file.exists()) {
+                boolean deletion = file.delete();
+                if (deletion) {
+                    fd.getLog().info("Deleted an empty unused FoundDiamonds file, for the sake of cleanliness");
+                }
+            }
+            return true;
+        }
+    }
+
+    
     public void readBlocksFromFile(File file, Collection<Location> list) {
         BufferedReader b = null;
         try {
@@ -173,9 +230,40 @@ public class FileHandler {
         }
     }
 
+    public void readTrapsFromFile(File file, ArrayList<Trap> arrayList) {
+        BufferedReader b = null;
+        try {
+            b = new BufferedReader(new FileReader(file));
+            String strLine = b.readLine();
+            while (strLine != null) {
+                if (!strLine.startsWith("#")) {
+                    try {
+                        String[] fs = strLine.split(";");
+                        Material[] oldmats = new Material[(Byte.parseByte(fs[0]) == 3) ? 1 : 4];
+                        for(int i = 0 ; i < oldmats.length; i++){
+                        	oldmats[i] = Material.getMaterial(Integer.parseInt(fs[2+i]));
+                        }
+                        Location temp = new Location(fd.getServer().getWorld(fs[fs.length-3]),Integer.parseInt(fs[fs.length-6]),Integer.parseInt(fs[fs.length-5]),Integer.parseInt(fs[fs.length-4])); 
+                        Trap lo = new Trap(Byte.parseByte(fs[0]), Material.getMaterial(Integer.parseInt(fs[1])),oldmats,
+                               Bukkit.getPlayer(fs[fs.length-7]), temp, Long.parseLong(fs[fs.length-2]) , Boolean.parseBoolean(fs[fs.length-1])) ;
+                        //arrayList.add(lo); // Not needed, since they get reformed as trap blocks
+                    } catch (Exception ex) {
+                        fd.getLog().severe(MessageFormat.format("Invalid block in file.  Please delete {0}", file.getName()));
+                    }
+                }
+                strLine = b.readLine();
+            }
+        } catch (Exception ex) {
+            fd.getLog().severe(MessageFormat.format("Problem reading from {0}.  Please delete it.", file.getName()));
+        } finally {
+            fd.getFileUtils().close(b);
+        }
+    }
+    
+    
     public void saveFlatFileData() {
         String info = "This file stores your trap block locations.";
-        boolean temp = writeBlocksToFile(traps, fd.getTrapHandler().getTrapBlocks(), info);
+        boolean temp = writeTrapsToFile(traps, fd.getTrapHandler().getTrapBlocks(), info);
         boolean temp2 = true;
         if (!fd.getConfig().getBoolean(Config.mysqlEnabled)) {
             String info5 = "This file stores blocks that won't be announced because players placed them.";

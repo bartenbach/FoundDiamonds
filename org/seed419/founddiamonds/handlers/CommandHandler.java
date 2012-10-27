@@ -46,7 +46,7 @@ public class CommandHandler implements CommandExecutor {
         this.fd = fd;
     }
 
- @Override
+
     public boolean onCommand(CommandSender sender, Command command, String commandLabel, String[] args) {
         Player player = null;
         if (sender instanceof Player) {
@@ -136,7 +136,14 @@ public class CommandHandler implements CommandExecutor {
                         fd.getPermissions().sendPermissionsMessage(sender);
                     }
                     return true;
-                } else if (arg.equalsIgnoreCase("trap")) {
+                } else if (arg.equalsIgnoreCase("trap")) {		
+                	/* TODO Still unsure about how the perms would work out. 
+                	* currently, players would need fd.trap to be able to set traps
+                	* and they would need fd.trap AND fd.trap.remove.* to remove any traps
+                	* but I personally don't think it's bad. This way admins can
+                	* give mods for instance the ability to just place traps, and admins
+                	* to remove them as well
+                	*/
                     if (sender instanceof Player) {
                         if (fd.getPermissions().hasTrapPerm(sender)) {
                             fd.getTrapHandler().handleTrap(player, args);
@@ -144,7 +151,7 @@ public class CommandHandler implements CommandExecutor {
                             fd.getPermissions().sendPermissionsMessage(sender);
                         }
                     } else {
-                        sender.sendMessage(Prefix.getChatPrefix() + ChatColor.RED + " Can't set traps from the console.");
+                        sender.sendMessage(Prefix.getChatPrefix() + ChatColor.RED + " Can't handle traps from the console.");
                     }
                     return true;
                 } else if (arg.equalsIgnoreCase("world")) {
