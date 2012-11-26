@@ -56,5 +56,7 @@ Found Diamonds Configuration:
     URL: localhost
     Port: 3306
     Prefix: fd
+  Debug:
+    Enabled: false
   Metrics:
     Enabled: true
