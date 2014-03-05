@@ -51,9 +51,9 @@ public class BlockBreakListener implements Listener  {
                 if (blockTotal == 0) {blockTotal = fd.getBlockCounter().getTotalBlocks(event.getBlock());}
                 if (lightLevel == 99) {lightLevel = fd.getLightLevelHandler().getLightLevel(event.getBlock());}
                 fd.getBroadcastHandler().handleBroadcast(mat, blockTotal, player, lightLevel);
-                fd.getAdminMessageHandler().clearReceivedAdminMessage();
             }
         }
+        fd.getAdminMessageHandler().clearReceivedAdminMessage();
 
         if (mat == Material.DIAMOND_ORE) {
             if (fd.getConfig().getBoolean(Config.logDiamondBreaks)) {
