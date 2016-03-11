@@ -57,7 +57,7 @@ public class BlockBreakListener implements Listener  {
 
         if (mat == Material.DIAMOND_ORE) {
             if (fd.getConfig().getBoolean(Config.logDiamondBreaks)) {
-                fd.getLoggingHandler().handleLogging(event.getPlayer(), event.getBlock(), false, false, false);
+                fd.getLoggingHandler().handleLogging(event.getPlayer(), event.getBlock(), false, false, false, false);
             }
         }
     }
