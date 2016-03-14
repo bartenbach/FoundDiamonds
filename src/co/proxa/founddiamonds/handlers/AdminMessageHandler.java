@@ -9,6 +9,7 @@ import com.google.common.io.ByteArrayDataOutput;
 import com.google.common.io.ByteStreams;
 
 import co.proxa.founddiamonds.FoundDiamonds;
+import co.proxa.founddiamonds.file.Config;
 import co.proxa.founddiamonds.util.Format;
 import co.proxa.founddiamonds.util.Prefix;
 
@@ -40,7 +41,23 @@ public class AdminMessageHandler {
                     receivedAdminMessage.add(y.getName());
                 }
             }
-        }        
+        }     
+        if(fd.getConfig().getBoolean(Config.useBungeeCord)){
+        	List<String> bungeeadmins = (List<String>) fd.getConfig().getList(Config.BungeeCordAdminList);
+        	if(bungeeadmins.size() > 0){
+        		for(String admin : bungeeadmins){
+        			if(Bukkit.getPlayer(admin) == null){
+        				ByteArrayDataOutput out = ByteStreams.newDataOutput();
+                  		out.writeUTF("Message");
+                  		out.writeUTF(admin);                  		  
+                  		out.writeUTF(adminMessage);
+                  		Bukkit.getServer().sendPluginMessage(fd, "BungeeCord", out.toByteArray());                  		
+        			}            		       		  
+            	}
+        	}else{
+        		System.out.println("[ERROR] Founddiamonds: Bungeecordsupport is enabled but no admins are defined. Can't send infos!");
+        	}
+        }
     }
 
     public void clearReceivedAdminMessage() {
