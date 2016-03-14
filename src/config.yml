@@ -2,6 +2,9 @@ Found Diamonds Configuration:
   Main:
     Disable in creative mode: true
     Give OPs all permissions: true
+    bungeecord: false
+    bungeecord_admins:
+      - '1337Zero'
   Light Level:
     Send violation admin messages: false
     Minimum amount of light required to mine blocks: 10%

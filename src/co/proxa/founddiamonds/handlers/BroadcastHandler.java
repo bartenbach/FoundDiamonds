@@ -1,16 +1,25 @@
 package co.proxa.founddiamonds.handlers;
 
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
+
+import com.google.common.io.ByteArrayDataOutput;
+import com.google.common.io.ByteStreams;
+
 import co.proxa.founddiamonds.FoundDiamonds;
 import co.proxa.founddiamonds.file.Config;
 import co.proxa.founddiamonds.util.Format;
 import co.proxa.founddiamonds.util.PluginUtils;
 import co.proxa.founddiamonds.util.Prefix;
 
+import java.io.ByteArrayOutputStream;
+import java.io.DataOutputStream;
+import java.io.IOException;
 import java.math.RoundingMode;
 import java.text.DecimalFormat;
+import java.util.List;
 
 public class BroadcastHandler {
 
@@ -45,11 +54,29 @@ public class BroadcastHandler {
                 "@LightLevel@", String.valueOf(lightLevel)).replace("@LightPercent@", formattedPercent + "%");
         String formatted = PluginUtils.customTranslateAlternateColorCodes('&', message);
         fd.getServer().getConsoleSender().sendMessage(formatted);
+       
+        if(fd.getConfig().getBoolean(Config.useBungeeCord)){
+        	List<String> bungeeadmins = (List<String>) fd.getConfig().getList(Config.BungeeCordAdminList);
+        	if(bungeeadmins.size() > 0){
+        		for(String admin : bungeeadmins){
+        			if(Bukkit.getPlayer(admin) == null){
+        				ByteArrayDataOutput out = ByteStreams.newDataOutput();
+                  		out.writeUTF("Message");
+                  		out.writeUTF(admin);                  		  
+                  		out.writeUTF(formatted);
+                  		Bukkit.getServer().sendPluginMessage(fd, "BungeeCord", out.toByteArray());                  		
+        			}            		       		  
+            	}
+        	}else{
+        		System.out.println("[ERROR] Founddiamonds: Bungeecordsupport is enabled but no admins are defined. Can't send infos!");
+        	}
+        }
+        
         for (Player x : fd.getServer().getOnlinePlayers()) {
             if (fd.getPermissions().hasBroadcastPerm(x) && fd.getWorldHandler().isEnabledWorld(x) && !fd.getAdminMessageHandler().receivedAdminMessage(x)) {
                 x.sendMessage(formatted);
             }
-        }
+        }       
         if (fd.getConfig().getBoolean(Config.cleanLog)) {
             fd.getLoggingHandler().writeToCleanLog(matName, blockTotal, player.getName());
         }

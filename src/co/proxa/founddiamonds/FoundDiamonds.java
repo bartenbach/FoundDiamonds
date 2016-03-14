@@ -1,8 +1,10 @@
 package co.proxa.founddiamonds;
 
+import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.plugin.PluginDescriptionFile;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
+
 import co.proxa.founddiamonds.file.Config;
 import co.proxa.founddiamonds.file.FileHandler;
 import co.proxa.founddiamonds.file.FileUtils;
@@ -88,6 +90,7 @@ public class FoundDiamonds extends JavaPlugin {
         registerEvents();
         startMetrics();
         mysql.getConnection();
+        
         log.info("Enabled");
     }
 
@@ -106,6 +109,10 @@ public class FoundDiamonds extends JavaPlugin {
         pm.registerEvents(pistonListener, this);
         pm.registerEvents(trapListener, this);
         pm.registerEvents(lightLevelListener, this);
+        System.out.println(getConfig().getBoolean(Config.useBungeeCord) + " bungeecord");
+        if(getConfig().getBoolean(Config.useBungeeCord)){
+        	this.getServer().getMessenger().registerOutgoingPluginChannel(this, "BungeeCord");
+        }       
     }
 
     public Permissions getPermissions() {

@@ -40,6 +40,9 @@ public class Config {
     public final static String bcMessage = "Found Diamonds Configuration.Broadcasts.Options.Message";
     public final static String useNick = "Found Diamonds Configuration.Broadcasts.Options.Use player nicknames";
     public final static String useOreColors = "Found Diamonds Configuration.Broadcasts.Options.Use classic ore colors for ores";
+    /*BungeeCord support*/
+    public final static String useBungeeCord = "Found Diamonds Configuration.Main.bungeecord";
+    public final static String BungeeCordAdminList = "Found Diamonds Configuration.Main.bungeecord_admins";
 
     /*Logging*/
     public final static String logTrapBreaks = "Found Diamonds Configuration.Logging.Trap breaks";
