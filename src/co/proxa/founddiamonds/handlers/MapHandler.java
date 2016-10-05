@@ -94,6 +94,8 @@ public class MapHandler {
         return color;
     }
 
+    // this is a magic value specified by the user, but it will parse material names
+    @SuppressWarnings("Deprecation")
     private Material parseMaterial(String is) {
         Material mat;
         try {

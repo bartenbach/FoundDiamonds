@@ -200,6 +200,7 @@ public class FileHandler {
         }
     }
 
+    //TODO these getMaterial() magic number calls we are writing to file
     public void readTrapsFromFile(File file) {
         BufferedReader b = null;
         try {

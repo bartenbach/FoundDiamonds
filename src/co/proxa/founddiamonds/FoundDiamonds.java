@@ -3,15 +3,12 @@ package co.proxa.founddiamonds;
 import org.bukkit.plugin.PluginDescriptionFile;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
-import co.proxa.founddiamonds.file.Config;
 import co.proxa.founddiamonds.file.FileHandler;
 import co.proxa.founddiamonds.file.FileUtils;
 import co.proxa.founddiamonds.handlers.*;
 import co.proxa.founddiamonds.listeners.*;
-import co.proxa.founddiamonds.metrics.MetricsLite;
 import co.proxa.founddiamonds.sql.MySQL;
 
-import java.io.IOException;
 import java.util.logging.Logger;
 
 /*
@@ -86,7 +83,7 @@ public class FoundDiamonds extends JavaPlugin {
         mapHandler.loadAllBlocks();
         getCommand("fd").setExecutor(new CommandHandler(this));
         registerEvents();
-        startMetrics();
+        //startMetrics();  broken
         mysql.getConnection();
         log.info("Enabled");
     }
@@ -180,7 +177,7 @@ public class FoundDiamonds extends JavaPlugin {
         return this.getDescription();
     }
 
-    private void startMetrics() {
+/*    private void startMetrics() {
         if (getConfig().getBoolean(Config.metrics)) {
             try {
                 MetricsLite metrics = new MetricsLite(this);
@@ -189,5 +186,5 @@ public class FoundDiamonds extends JavaPlugin {
                 this.log.warning("Metrics failed to start - Ignoring.");
             }
         }
-    }
+    }*/
 }

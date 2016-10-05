@@ -1,9 +1,6 @@
 package co.proxa.founddiamonds.handlers;
 
-import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
-import org.bukkit.Location;
-import org.bukkit.Material;
+import org.bukkit.*;
 import org.bukkit.block.Block;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
@@ -220,7 +217,7 @@ public class TrapHandler {
 				kicked = true;
 			}
 			if (fd.getConfig().getBoolean(Config.banOnTrapBreak)) {
-				player.setBanned(true);
+                Bukkit.getBanList(BanList.Type.NAME).addBan(event.getPlayer().getName(), fd.getConfig().getString(Config.banMessage), null, null);
 				banned = true;
 			}
             if(fd.getConfig().getBoolean(Config.ExecutecommandOnTrapBreak)){

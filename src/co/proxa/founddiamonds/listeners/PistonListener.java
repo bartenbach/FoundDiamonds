@@ -15,6 +15,7 @@ public class PistonListener implements Listener {
         this.fd = fd;
     }
 
+    // TODO does not check for sticky piston
     @EventHandler
     void onPistonRetract(final BlockPistonRetractEvent event) {
         if (fd.getTrapHandler().isTrapBlock(event.getRetractLocation())) {

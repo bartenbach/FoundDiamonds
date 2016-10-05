@@ -13,6 +13,8 @@ public class MenuHandler {
 
     private FoundDiamonds fd;
     private final static int configPages = 2;
+    private final static String materialUrl = "https://hub.spigotmc.org/javadocs/spigot/org/bukkit/Material.html";
+    private final static String colorUrl = "https://hub.spigotmc.org/javadocs/spigot/org/bukkit/ChatColor.html";
 
     public MenuHandler(FoundDiamonds fd) {
         this.fd = fd;
@@ -107,9 +109,9 @@ public class MenuHandler {
         sender.sendMessage(ChatColor.DARK_AQUA +"        You can override this default color by specifying white");
         sender.sendMessage(ChatColor.DARK_AQUA +"        Example: /fd light add diamond,white");
         sender.sendMessage(ChatColor.DARK_AQUA +"        Block names can be found here:");
-        sender.sendMessage(ChatColor.DARK_AQUA +"        http://jd.bukkit.org/apidocs/org/bukkit/Material.html");
+        sender.sendMessage(ChatColor.DARK_AQUA +"        " + materialUrl);
         sender.sendMessage(ChatColor.DARK_AQUA +"        Color names can be found here:");
-        sender.sendMessage(ChatColor.DARK_AQUA +"        http://jd.bukkit.org/apidocs/org/bukkit/ChatColor.html");
+        sender.sendMessage(ChatColor.DARK_AQUA +"        " + colorUrl);
         sender.sendMessage(ChatColor.RED + "    remove [block]" + ChatColor.WHITE + " - Stop a block from being monitored");
         sender.sendMessage(ChatColor.DARK_AQUA +"        example: /fd light rm dirt");
         sender.sendMessage(ChatColor.DARK_AQUA +"        example: /fd light remove obsidian");
@@ -126,9 +128,9 @@ public class MenuHandler {
         sender.sendMessage(ChatColor.DARK_AQUA +"        You can override this default color by specifying white");
         sender.sendMessage(ChatColor.DARK_AQUA +"        Example: /fd admin add diamond,white");
         sender.sendMessage(ChatColor.DARK_AQUA +"        Block names can be found here:");
-        sender.sendMessage(ChatColor.DARK_AQUA +"        http://jd.bukkit.org/apidocs/org/bukkit/Material.html");
+        sender.sendMessage(ChatColor.DARK_AQUA +"        " + materialUrl);
         sender.sendMessage(ChatColor.DARK_AQUA +"        Color names can be found here:");
-        sender.sendMessage(ChatColor.DARK_AQUA +"        http://jd.bukkit.org/apidocs/org/bukkit/ChatColor.html");
+        sender.sendMessage(ChatColor.DARK_AQUA +"        " + colorUrl);
         sender.sendMessage(ChatColor.RED + "    remove [block]" + ChatColor.WHITE + " - Remove an admin message block");
         sender.sendMessage(ChatColor.DARK_AQUA +"        example: /fd admin rm dirt");
         sender.sendMessage(ChatColor.DARK_AQUA +"        example: /fd admin remove obsidian");
@@ -145,9 +147,9 @@ public class MenuHandler {
         sender.sendMessage(ChatColor.DARK_AQUA +"        You can override this default color by specifying white");
         sender.sendMessage(ChatColor.DARK_AQUA +"        Example: /fd bc add diamond,white");
         sender.sendMessage(ChatColor.DARK_AQUA +"        Block names can be found here:");
-        sender.sendMessage(ChatColor.DARK_AQUA +"        http://jd.bukkit.org/apidocs/org/bukkit/Material.html");
+        sender.sendMessage(ChatColor.DARK_AQUA +"        " + materialUrl);
         sender.sendMessage(ChatColor.DARK_AQUA +"        Color names can be found here:");
-        sender.sendMessage(ChatColor.DARK_AQUA +"        http://jd.bukkit.org/apidocs/org/bukkit/ChatColor.html");
+        sender.sendMessage(ChatColor.DARK_AQUA +"        " + colorUrl);
         sender.sendMessage(ChatColor.RED + "    remove [block]" + ChatColor.WHITE + " - Remove a block from being broadcasted");
         sender.sendMessage(ChatColor.DARK_AQUA +"        example: /fd bc rm dirt");
         sender.sendMessage(ChatColor.DARK_AQUA +"        example: /fd bc remove obsidian");
@@ -163,7 +165,7 @@ public class MenuHandler {
         sender.sendMessage(ChatColor.DARK_AQUA +"        Example: /fd trap set gold ore 5");
         sender.sendMessage(ChatColor.DARK_AQUA +"        This sets a gold ore trap 6 blocks below you");
         sender.sendMessage(ChatColor.DARK_AQUA +"        Block names can be found here:");
-        sender.sendMessage(ChatColor.DARK_AQUA +"        http://jd.bukkit.org/apidocs/org/bukkit/Material.html");
+        sender.sendMessage(ChatColor.DARK_AQUA +"        " + materialUrl);
         sender.sendMessage(ChatColor.RED + "    remove [trap ID number]" + ChatColor.WHITE + " - Remove an existing trap");
         sender.sendMessage(ChatColor.DARK_AQUA +"        Example: /fd trap rm 0");
         sender.sendMessage(ChatColor.DARK_AQUA +"        Shortcuts: remove, rm, r");

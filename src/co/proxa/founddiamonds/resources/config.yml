@@ -12,6 +12,7 @@ Found Diamonds Configuration:
     Ban players on trap break: false
     Execute command on trap break: false
     Kick message: "You triggered an X-RAY trap block"
+    Ban message: "You triggered an X-Ray trap block"
     Command on trap break: "jail @Player@ X-Ray Hacking!"
   Awards:
     Items:

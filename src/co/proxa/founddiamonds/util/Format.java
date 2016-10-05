@@ -1,6 +1,6 @@
 package co.proxa.founddiamonds.util;
 
-import org.apache.commons.lang.WordUtils;
+import org.apache.commons.lang3.text.WordUtils;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 

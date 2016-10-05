@@ -15,6 +15,7 @@ public class Config {
     /*Traps*/
     public final static String kickOnTrapBreak = "Found Diamonds Configuration.Traps.Kick players on trap break";
     public final static String kickMessage = "Found Diamonds Configuration.Traps.Kick message";
+    public final static String banMessage = "Found Diamonds Configuration.Traps.Ban message";
     public final static String banOnTrapBreak = "Found Diamonds Configuration.Traps.Ban players on trap break";
     public final static String commandOnTrapBreak = "Found Diamonds Configuration.Traps.Execute command on trap break";
     public final static String ExecutecommandOnTrapBreak = "Found Diamonds Configuration.Traps.Command on trap break";
