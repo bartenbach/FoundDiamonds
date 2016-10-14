@@ -37,6 +37,7 @@ Found Diamonds Configuration:
         - 'INCREASE_DAMAGE'
         - 'INVISIBILITY'
         - 'JUMP'
+        - 'LUCK'
         - 'NIGHT_VISION'
         - 'REGENERATION'
         - 'SATURATION'
