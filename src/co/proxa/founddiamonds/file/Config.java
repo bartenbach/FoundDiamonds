@@ -43,6 +43,7 @@ public class Config {
     /*BungeeCord support*/
     public final static String useBungeeCord = "Found Diamonds Configuration.Main.bungeecord";
     public final static String BungeeCordAdminList = "Found Diamonds Configuration.Main.bungeecord_admins";
+	public final static String BungeeCordServer = "Found Diamonds Configuration.Main.bungeecord_server";
 
     /*Logging*/
     public final static String logTrapBreaks = "Found Diamonds Configuration.Logging.Trap breaks";

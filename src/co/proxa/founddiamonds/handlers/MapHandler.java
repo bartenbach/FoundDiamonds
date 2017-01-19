@@ -44,7 +44,7 @@ public class MapHandler {
         } else {
             List<String> thelist = fd.getConfig().getStringList(configLoc);
             for (String x : thelist) {
-                String[] sp = x.split(",");
+            	 String[] sp = x.split(",");
                 Material mat = parseMaterial(sp[0]);
                 if (mat != null && mat.isBlock()) {
                     try {

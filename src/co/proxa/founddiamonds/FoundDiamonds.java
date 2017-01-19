@@ -36,7 +36,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 public class FoundDiamonds extends JavaPlugin {
 
 
-    private Logger log;
+    private static Logger log;
     private final BlockPlaceListener blockPlaceListener = new BlockPlaceListener(this);
     private final BlockBreakListener blockBreakListener = new BlockBreakListener(this);
     private final PlayerDamageListener playerDamageListener = new PlayerDamageListener(this);
@@ -58,6 +58,7 @@ public class FoundDiamonds extends JavaPlugin {
     private final ItemHandler itemHandler = new ItemHandler(this);
     private final MenuHandler menuHandler = new MenuHandler(this);
     private final BlockCounter blockTotal = new BlockCounter(this);
+    public static FoundDiamonds fd;
 
    /*
    TODO:
@@ -90,7 +91,7 @@ public class FoundDiamonds extends JavaPlugin {
         registerEvents();
         startMetrics();
         mysql.getConnection();
-        
+        FoundDiamonds.fd = this;
         log.info("Enabled");
     }
 
@@ -193,8 +194,14 @@ public class FoundDiamonds extends JavaPlugin {
                 MetricsLite metrics = new MetricsLite(this);
                 metrics.start();
             } catch (IOException e) {
-                this.log.warning("Metrics failed to start - Ignoring.");
+                log.warning("Metrics failed to start - Ignoring.");
             }
         }
+    }
+    public void debug(String msg){
+    	if(getConfig().getBoolean(Config.debug)){
+    		log.info("[FoundDiamonds-Debug] " + msg);
+    	}
+    	
     }
 }

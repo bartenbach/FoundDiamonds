@@ -23,9 +23,9 @@ public class BlockBreakListener implements Listener  {
 
         final Player player = event.getPlayer();
 
-        if (!fd.getWorldHandler().isEnabledWorld(player)) { return; }
-        if (!fd.getWorldHandler().isValidGameMode(player)) { return; }
-        if (event.getEventName().equalsIgnoreCase("FakeBlockBreakEvent")) { return; }
+        if (!fd.getWorldHandler().isEnabledWorld(player)) { FoundDiamonds.fd.debug("world is disabled");return; }
+        if (!fd.getWorldHandler().isValidGameMode(player)) { FoundDiamonds.fd.debug("world is disabled");return; }
+        if (event.getEventName().equalsIgnoreCase("FakeBlockBreakEvent")) { FoundDiamonds.fd.debug("Fakeblockbreakevent");return; }
 
         final Location loc = event.getBlock().getLocation();
         fd.getLightLevelHandler().checkAndClearLightLevelLocation(loc);
@@ -39,7 +39,10 @@ public class BlockBreakListener implements Listener  {
         int lightLevel = 99;
 
         if (fd.getPermissions().hasMonitorPerm(player)) {
+        	FoundDiamonds.fd.debug(player.getName() + " has monitor perm");
+        	System.out.println(fd.getMapHandler().getAdminMessageBlocks().keySet());
             if (fd.getMapHandler().getAdminMessageBlocks().containsKey(mat)) {
+            	FoundDiamonds.fd.debug("Material is logged");
                 lightLevel = fd.getLightLevelHandler().getLightLevel(event.getBlock());
                 blockTotal = fd.getBlockCounter().getTotalBlocks(event.getBlock());
                 fd.getAdminMessageHandler().sendAdminMessage(mat, blockTotal, player);

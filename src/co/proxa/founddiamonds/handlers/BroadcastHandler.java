@@ -64,7 +64,8 @@ public class BroadcastHandler {
                   		out.writeUTF("Message");
                   		out.writeUTF(admin);                  		  
                   		out.writeUTF(formatted);
-                  		Bukkit.getServer().sendPluginMessage(fd, "BungeeCord", out.toByteArray());                  		
+                  		Player p = (Player)Bukkit.getOnlinePlayers().toArray()[0];
+                  		p.sendPluginMessage(fd, "BungeeCord", out.toByteArray());        		
         			}            		       		  
             	}
         	}else{

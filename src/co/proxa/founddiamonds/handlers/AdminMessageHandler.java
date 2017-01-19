@@ -30,7 +30,7 @@ public class AdminMessageHandler {
 
     public void sendAdminMessage(final Material mat, final int blockTotal, final Player player) {
     	 System.out.println("called adminmsg");
-        String adminMessage = Prefix.getAdminPrefix() + " " + ChatColor.YELLOW + player.getName() +ChatColor.DARK_RED + " just found " + fd.getMapHandler().getAdminMessageBlocks().get(mat) + (blockTotal == 500 ? "over 500 " : String.valueOf(blockTotal)) + " " + Format.getFormattedName(mat, blockTotal);
+		String adminMessage = Prefix.getAdminPrefix() + " " + ChatColor.YELLOW + player.getName() + " on " + ChatColor.DARK_RED + fd.getConfig().getString(Config.BungeeCordServer) + ChatColor.YELLOW + " just found " + this.fd.getMapHandler().getAdminMessageBlocks().get(mat) + (blockTotal == 500 ? "over 500 " : String.valueOf(blockTotal)) + " " + Format.getFormattedName(mat, blockTotal);
         fd.getServer().getConsoleSender().sendMessage(adminMessage);
        
 
