@@ -212,10 +212,10 @@ public class FileHandler {
                         String[] fs = strLine.split(";");
                         Material[] oldmats = new Material[(Byte.parseByte(fs[0]) == 3) ? 1 : 4];
                         for(int i = 0 ; i < oldmats.length; i++){
-                        	oldmats[i] = Material.getMaterial(Integer.parseInt(fs[2+i]));
+                        	oldmats[i] = Material.getMaterial(fs[2+i]);
                         }
                         Location temp = new Location(fd.getServer().getWorld(fs[fs.length-3]),Integer.parseInt(fs[fs.length-6]),Integer.parseInt(fs[fs.length-5]),Integer.parseInt(fs[fs.length-4]));
-                        Trap lo = new Trap(Byte.parseByte(fs[0]), Material.getMaterial(Integer.parseInt(fs[1])),oldmats,
+                        Trap lo = new Trap(Byte.parseByte(fs[0]), Material.getMaterial(fs[1]),oldmats,
                                fs[fs.length-7], temp, Long.parseLong(fs[fs.length-2]) , Boolean.parseBoolean(fs[fs.length-1]));
                     } catch (Exception ex) {
                         fd.getLog().severe(MessageFormat.format("Invalid block in file.  Please delete {0}", file.getName()));

@@ -169,10 +169,14 @@ public class TrapHandler {
             case DIRT:
             case GRASS:
             case VINE:
-            case LEAVES:
+            case ACACIA_LEAVES:
+            case BIRCH_LEAVES:
+            case DARK_OAK_LEAVES:
+            case JUNGLE_LEAVES:
+            case OAK_LEAVES:
+            case SPRUCE_LEAVES:
             case DEAD_BUSH:
-            case REDSTONE_TORCH_ON:
-            case REDSTONE_TORCH_OFF:
+            case REDSTONE_TORCH:
             case WATER:
             case LAVA:
                 return false;
@@ -191,9 +195,8 @@ public class TrapHandler {
 		Block block = event.getBlock();
 		Trap trap = inverseList.get(block);
 		if (fd.getPermissions().hasPerm(player, "fd.trap")) {
-			//player.sendMessage(ChatColor.AQUA + "Trap block removed");
             sendTrapRemovedMessage(player, trap);
-            //trap.removeTrap();
+            //TODO does this remove the trap?
 		} else {
 			String trapMessage;
 			if (trap.isPersistent()) {

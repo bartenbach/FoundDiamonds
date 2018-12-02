@@ -94,16 +94,11 @@ public class MapHandler {
         return color;
     }
 
-    // this is a magic value specified by the user, but it will parse material names
-    @SuppressWarnings("Deprecation")
     private Material parseMaterial(String is) {
         Material mat;
         try {
-            mat = Material.getMaterial(Integer.parseInt(is));
-            return mat;
-        } catch (NumberFormatException ex) {}
-        try {
             mat = Material.getMaterial(is.toUpperCase().replace(" ", "_"));
+            System.out.println("got material: " + mat.name());
             return mat;
         } catch (Exception ex) {
             fd.getLog().severe("Unable to match material '" + is + "'");
@@ -124,7 +119,7 @@ public class MapHandler {
         broadcastedBlocks.put(Material.COAL_ORE, ChatColor.DARK_GRAY);
         fd.getLog().info("Coal Ore added");
         broadcastedBlocks.put(Material.REDSTONE_ORE, ChatColor.DARK_RED);
-        broadcastedBlocks.put(Material.GLOWING_REDSTONE_ORE, ChatColor.DARK_RED);
+        // TODO why broadcastedBlocks.put(Material.GLOWING_REDSTONE_ORE, ChatColor.DARK_RED);
         fd.getLog().info("Redstone Ore added");
         broadcastedBlocks.put(Material.EMERALD_ORE, ChatColor.GREEN);
         fd.getLog().info("Emerald Ore added");
@@ -151,6 +146,7 @@ public class MapHandler {
         } else if (args.length >= 3) {
             String s = PluginUtils.getArgs2Plus(args);
             String[] sp = s.split(",");
+            System.out.println(sp[0]);
             Material mat = parseMaterial(sp[0]);
             if (mat != null) {
                 ChatColor c;

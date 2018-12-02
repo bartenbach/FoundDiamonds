@@ -55,7 +55,7 @@ public class BlockCounter {
         for (BlockFace y : faces) {
             Block var = passed.getRelative(y);
             if (var.getType() == originalMaterial && !blocks.contains(var.getLocation()) && isAnnounceable(var.getLocation())
-                    || PluginUtils.isRedstone(var) && PluginUtils.isRedstone(originalMaterial) && isAnnounceable(var.getLocation())
+                    || var.getType() == Material.REDSTONE_ORE && originalMaterial == Material.REDSTONE_ORE && isAnnounceable(var.getLocation())
                     && !blocks.contains(var.getLocation())) {
                 if (counting) {
                     counted.add(var.getLocation());

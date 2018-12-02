@@ -28,9 +28,7 @@ public class AdminMessageHandler {
         for (Player y : fd.getServer().getOnlinePlayers()) {
             if (fd.getPermissions().hasAdminMessagePerm(y) && y != player) {
                 y.sendMessage(adminMessage);
-                if (!receivedAdminMessage.contains(y.getName())) {
-                    receivedAdminMessage.add(y.getName());
-                }
+                receivedAdminMessage.add(y.getName());
             }
         }
     }

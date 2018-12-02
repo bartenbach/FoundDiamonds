@@ -20,9 +20,9 @@ Found Diamonds Configuration:
       Award all players: true
       Percent of time items are given: 25
       Maximum number or items to give: 3
-      Random Item 1: 265
-      Random Item 2: 263
-      Random Item 3: 340
+      Random Item 1: Iron_Ingot
+      Random Item 2: Coal
+      Random Item 3: Carrot
     Spells:
       Random spells for finding diamonds: false
       Award all players: true

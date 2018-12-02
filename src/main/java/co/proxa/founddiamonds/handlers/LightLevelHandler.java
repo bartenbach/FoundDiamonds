@@ -29,9 +29,7 @@ public class LightLevelHandler {
         final Location loc = event.getBlock().getLocation();
         if (blockIsBelowAcceptableLightLevel(block)) {
             if (!announcedLightBlocks.contains(loc)) {
-                for (Location x : fd.getBlockCounter().getAllLikeBlockLocations(event.getBlock())) {
-                     announcedLightBlocks.add(x);
-                }
+                announcedLightBlocks.addAll(fd.getBlockCounter().getAllLikeBlockLocations(event.getBlock()));
                 if (!fd.getConfig().getBoolean(Config.silentMode)) {
                     player.sendMessage(ChatColor.RED + "Mining in the dark is dangerous, place a torch!");
                 }
@@ -71,9 +69,7 @@ public class LightLevelHandler {
     }
 
     public void checkAndClearLightLevelLocation(Location loc) {
-        if(announcedLightBlocks.contains(loc)) {
-            announcedLightBlocks.remove(loc);
-        }
+        announcedLightBlocks.remove(loc);
     }
 
     public int getLightLevel(final Block block) {

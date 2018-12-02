@@ -27,36 +27,35 @@ public class ItemHandler {
     }
 
     private void selectRandomItem(Player player, int randomNumber) {
-        int randomItem;
+        String randomItem;
         if (randomNumber < 50) {
-            randomItem = fd.getConfig().getInt(Config.randomItem1);
-        } else if (randomNumber >= 50 && randomNumber < 100) {
-            randomItem = fd.getConfig().getInt(Config.randomItem2);
+            randomItem = fd.getConfig().getString(Config.randomItem1);
+        } else if (randomNumber < 100) {
+            randomItem = fd.getConfig().getString(Config.randomItem2);
         } else {
-            randomItem = fd.getConfig().getInt(Config.randomItem3);
+            randomItem = fd.getConfig().getString(Config.randomItem3);
         }
         int amount = getRandomItemAmount();
         giveItems(player, randomItem, amount);
     }
 
-    //@SuppressWarnings("deprecation")
-    private void giveItems(Player player, int item, int amount) {
+    private void giveItems(Player player, String item, int amount) {
         if (fd.getConfig().getBoolean(Config.awardAllItems)) {
             for(Player p: fd.getServer().getOnlinePlayers()) {
                 if (fd.getWorldHandler().isEnabledWorld(p)) {
                     p.sendMessage(ChatColor.GRAY + "Everyone else got " + amount +
                             " " + Format.getFormattedName(Material.getMaterial(item), amount));
                     if (p != player) {
-                        p.getInventory().addItem(new ItemStack(item, amount));
-                        p.updateInventory();
+                        p.getInventory().addItem(new ItemStack(Material.getMaterial(item), amount));
+                        //p.updateInventory();
                     }
                 }
             }
         } else {
             player.sendMessage(ChatColor.GRAY + "You got " + amount +
                     " " + Format.getFormattedName(Material.getMaterial(item), amount));
-            player.getInventory().addItem(new ItemStack(item, amount));
-            player.updateInventory();
+            player.getInventory().addItem(new ItemStack(Material.getMaterial(item), amount));
+            //player.updateInventory();
         }
     }
 
