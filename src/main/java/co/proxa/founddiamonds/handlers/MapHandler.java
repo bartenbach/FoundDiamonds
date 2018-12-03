@@ -119,7 +119,6 @@ public class MapHandler {
         broadcastedBlocks.put(Material.COAL_ORE, ChatColor.DARK_GRAY);
         fd.getLog().info("Coal Ore added");
         broadcastedBlocks.put(Material.REDSTONE_ORE, ChatColor.DARK_RED);
-        // TODO why broadcastedBlocks.put(Material.GLOWING_REDSTONE_ORE, ChatColor.DARK_RED);
         fd.getLog().info("Redstone Ore added");
         broadcastedBlocks.put(Material.EMERALD_ORE, ChatColor.GREEN);
         fd.getLog().info("Emerald Ore added");
