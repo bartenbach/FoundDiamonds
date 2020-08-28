@@ -5,7 +5,6 @@ import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
 import co.proxa.founddiamonds.file.Config;
-import co.proxa.founddiamonds.util.PluginUtils;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -14,13 +13,13 @@ public class BlockCounter {
 
     private FoundDiamonds fd;
     private HashSet<Location> counted = new HashSet<Location>();
-    private final BlockFace[] horizontalFaces = {BlockFace.EAST, BlockFace.WEST, BlockFace.SOUTH, BlockFace.NORTH,
+    private final BlockFace[] horizontalFaces = { BlockFace.EAST, BlockFace.WEST, BlockFace.SOUTH, BlockFace.NORTH,
             BlockFace.SOUTH_EAST, BlockFace.SOUTH_WEST, BlockFace.NORTH_EAST, BlockFace.NORTH_WEST, BlockFace.DOWN,
-            BlockFace.UP};
-    private final BlockFace[] upperFaces = {BlockFace.EAST, BlockFace.WEST, BlockFace.SOUTH, BlockFace.NORTH,
-            BlockFace.SOUTH_EAST, BlockFace.SOUTH_WEST, BlockFace.NORTH_EAST, BlockFace.NORTH_WEST, BlockFace.UP};
-    private final BlockFace[] LowerFaces = {BlockFace.EAST, BlockFace.WEST, BlockFace.SOUTH, BlockFace.NORTH,
-            BlockFace.SOUTH_EAST, BlockFace.SOUTH_WEST, BlockFace.NORTH_EAST, BlockFace.NORTH_WEST, BlockFace.DOWN};
+            BlockFace.UP };
+    private final BlockFace[] upperFaces = { BlockFace.EAST, BlockFace.WEST, BlockFace.SOUTH, BlockFace.NORTH,
+            BlockFace.SOUTH_EAST, BlockFace.SOUTH_WEST, BlockFace.NORTH_EAST, BlockFace.NORTH_WEST, BlockFace.UP };
+    private final BlockFace[] LowerFaces = { BlockFace.EAST, BlockFace.WEST, BlockFace.SOUTH, BlockFace.NORTH,
+            BlockFace.SOUTH_EAST, BlockFace.SOUTH_WEST, BlockFace.NORTH_EAST, BlockFace.NORTH_WEST, BlockFace.DOWN };
 
     public BlockCounter(FoundDiamonds fd) {
         this.fd = fd;
@@ -41,27 +40,37 @@ public class BlockCounter {
     }
 
     private void cycleHorizontalFaces(Material mat, Block original, Set<Location> blocks, boolean counting) {
-        if (blocks.size() >= 500) { return; }
+        if (blocks.size() >= 500) {
+            return;
+        }
         findLikeBlocks(horizontalFaces, original, mat, blocks, counting);
-        if (blocks.size() >= 500) { return; }
+        if (blocks.size() >= 500) {
+            return;
+        }
         Block upper = original.getRelative(BlockFace.UP);
         findLikeBlocks(upperFaces, upper, mat, blocks, counting);
-        if (blocks.size() >= 500) { return; }
+        if (blocks.size() >= 500) {
+            return;
+        }
         Block lower = original.getRelative(BlockFace.DOWN);
         findLikeBlocks(LowerFaces, lower, mat, blocks, counting);
     }
 
-    private void findLikeBlocks(BlockFace[] faces, Block passed, Material originalMaterial, Set<Location> blocks, boolean counting) {
+    private void findLikeBlocks(BlockFace[] faces, Block passed, Material originalMaterial, Set<Location> blocks,
+            boolean counting) {
         for (BlockFace y : faces) {
             Block var = passed.getRelative(y);
-            if (var.getType() == originalMaterial && !blocks.contains(var.getLocation()) && isAnnounceable(var.getLocation())
-                    || var.getType() == Material.REDSTONE_ORE && originalMaterial == Material.REDSTONE_ORE && isAnnounceable(var.getLocation())
-                    && !blocks.contains(var.getLocation())) {
+            if (var.getType() == originalMaterial && !blocks.contains(var.getLocation())
+                    && isAnnounceable(var.getLocation())
+                    || var.getType() == Material.REDSTONE_ORE && originalMaterial == Material.REDSTONE_ORE
+                            && isAnnounceable(var.getLocation()) && !blocks.contains(var.getLocation())) {
                 if (counting) {
                     counted.add(var.getLocation());
                 }
                 blocks.add(var.getLocation());
-                if (blocks.size() >= 500) { return; }
+                if (blocks.size() >= 500) {
+                    return;
+                }
                 cycleHorizontalFaces(originalMaterial, var, blocks, counting);
             }
         }

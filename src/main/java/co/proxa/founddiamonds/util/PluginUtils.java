@@ -1,8 +1,6 @@
 package co.proxa.founddiamonds.util;
 
 import org.bukkit.ChatColor;
-import org.bukkit.Material;
-import org.bukkit.block.Block;
 
 public class PluginUtils {
 
@@ -14,9 +12,11 @@ public class PluginUtils {
         }
         return sb.toString().trim();
     }
+
     public static String getArgs2Plus(String[] args) {
         StringBuilder sb = new StringBuilder();
-        args[0] = ""; args[1] = "";
+        args[0] = "";
+        args[1] = "";
         for (String x : args) {
             sb.append(x).append(" ");
         }
@@ -26,9 +26,9 @@ public class PluginUtils {
     public static String customTranslateAlternateColorCodes(char altColorChar, String textToTranslate) {
         char[] charArray = textToTranslate.toCharArray();
         for (int i = 0; i < charArray.length - 1; i++) {
-            if (charArray[i] == altColorChar && "0123456789AaBbCcDdEeFfKkNnRrLlMmOo".indexOf(charArray[i+1]) > -1) {
+            if (charArray[i] == altColorChar && "0123456789AaBbCcDdEeFfKkNnRrLlMmOo".indexOf(charArray[i + 1]) > -1) {
                 charArray[i] = ChatColor.COLOR_CHAR;
-                charArray[i+1] = Character.toLowerCase(charArray[i+1]);
+                charArray[i + 1] = Character.toLowerCase(charArray[i + 1]);
             }
         }
         return new String(charArray);
