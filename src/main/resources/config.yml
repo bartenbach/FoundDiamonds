@@ -1,0 +1,69 @@
+Found Diamonds Configuration:
+  Main:
+    Disable in creative mode: true
+    Give OPs all permissions: true
+  Light Level:
+    Send violation admin messages: false
+    Minimum amount of light required to mine blocks: 10%
+    Silent Mode: true
+    Monitored Blocks:
+  Traps:
+    Kick players on trap break: true
+    Ban players on trap break: false
+    Execute command on trap break: false
+    Kick message: "You triggered an X-RAY trap block"
+    Ban message: "You triggered an X-Ray trap block"
+    Command on trap break: "jail @Player@ X-Ray Hacking!"
+  Awards:
+    Items:
+      Random items for finding diamonds: false
+      Award all players: true
+      Percent of time items are given: 25
+      Maximum number or items to give: 3
+      Random Item 1: Iron_Ingot
+      Random Item 2: Coal
+      Random Item 3: Carrot
+    Spells:
+      Random spells for finding diamonds: false
+      Award all players: true
+      Spell strength (1-5): 3
+      Percent of time spells are casted: 100
+      Possible potions:
+        - 'ABSORPTION'
+        - 'DAMAGE_RESISTANCE'
+        - 'FAST_DIGGING'
+        - 'FIRE_RESISTANCE'
+        - 'HEALTH_BOOST'
+        - 'INCREASE_DAMAGE'
+        - 'INVISIBILITY'
+        - 'JUMP'
+        - 'LUCK'
+        - 'NIGHT_VISION'
+        - 'REGENERATION'
+        - 'SATURATION'
+        - 'SPEED'
+        - 'WATER_BREATHING'
+  Broadcasts:
+    Broadcasted Blocks:
+    Options:
+      Message: "@Player@ found @Number@ @BlockName@"
+      Use player nicknames: true
+      Use classic ore colors for ores: true
+  Logging:
+    Trap breaks: true
+    Light Level Violations: false
+    Log all diamond ore breaks: false
+    Clean log (all ores): false
+  Enabled Worlds:
+  Admin Messages:
+    Admin Message Blocks:
+  MySQL:
+    Enabled: false
+    Username: root
+    Password: bacon
+    DatabaseName: minecraft
+    URL: localhost
+    Port: 3306
+    Prefix: fd
+  Metrics:
+    Enabled: true

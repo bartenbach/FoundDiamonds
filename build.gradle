@@ -1,0 +1,27 @@
+plugins {
+  id 'java'
+  id 'idea'
+}
+
+version = '3.6.6'
+jar {
+    manifest {
+        attributes 'Implementation-Title': 'FoundDiamonds',
+                   'Implementation-Version': version
+    }
+}
+
+repositories {
+  mavenCentral()
+  mavenLocal()
+}
+
+dependencies {
+	testCompile('org.junit.jupiter:junit-jupiter-api:5.3.2')
+	testCompile('org.junit.jupiter:junit-jupiter-params:5.3.2')
+	testRuntime('org.junit.jupiter:junit-jupiter-engine:5.3.2')
+    /* currently, the bukkit dependency is build using spigot's BuildTools.jar,
+       and installed to the local Maven repository.  because legal issues...*/
+    compile('org.bukkit:bukkit:1.13.2-R0.1-SNAPSHOT')
+    compile 'org.apache.commons:commons-lang3:3.8.1'
+}

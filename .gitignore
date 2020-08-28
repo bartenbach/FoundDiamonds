@@ -1,0 +1,6 @@
+.idea/*
+..gitignore.un~
+.gitignore~
+out/*
+.gradle/
+build/*
