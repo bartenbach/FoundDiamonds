@@ -3,4 +3,10 @@
 .gitignore~
 out/*
 .gradle/
+gradle/
 build/*
+.classpath
+.project
+.settings
+.vscode
+bin/
