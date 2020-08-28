@@ -1,6 +1,6 @@
 package co.proxa.founddiamonds.util;
 
-import org.apache.commons.lang3.text.WordUtils;
+import org.apache.commons.text.WordUtils;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 
@@ -119,7 +119,7 @@ public class Format {
         } else {
             matName = material(mat);
             if (total > 1) {
-                matName+="s";
+                matName += "s";
             }
         }
         return matName;
